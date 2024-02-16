@@ -8,7 +8,8 @@ services:
     volumes:
       - ./app:/var/www/html
     networks:
-      - mynet
+      - app-network
+
 
   nginx:
     image: nginx:latest
@@ -20,7 +21,7 @@ services:
     depends_on:
       - php
     networks:
-      - mynet
+      - app-network
 
   mysql:
     image: mysql:latest
@@ -34,7 +35,8 @@ services:
     ports:
       - "3306:3306"
     networks:
-      - mynet
+      - app-network
 
 networks:
-  mynet:
+  app-network:
+    driver: bridge
